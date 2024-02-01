@@ -5,6 +5,8 @@ ruby "3.2.0"
 # Auth gem
 gem 'bcrypt', '~> 3.1.7'
 
+gem "tailwindcss-rails"
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3"
 
