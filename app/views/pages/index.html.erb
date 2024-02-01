@@ -1,9 +1,13 @@
-<% if current_user %>
-  <h1>Welcome, <%= current_user.name %></h1>
-  <%= button_to 'Log out', user_session_path(current_user),  method: :delete %><br>
+  <% if current_user&.user_type == 'claims' %>
+    <h1>Welcome, claims user</h1>
+    <%= button_to 'Log out', user_session_path(current_user),  method: :delete %><br>
+  <% elsif current_user&.user_type == 'admin' %>
+    <h1>Welcome, admin user</h1>
+    <%= link_to 'Create Claim', new_claim_path %>
+    <%= button_to 'Log out', user_session_path(current_user),  method: :delete %><br>
 <% else %>
   <h1>This is the index page</h1>
   <%= link_to 'Login', new_user_session_path %><br>
   <%= link_to 'Sign up', new_user_path %><br>
 <% end %>
-<%= link_to 'Secret page', '/pages/create_claim' %>
+

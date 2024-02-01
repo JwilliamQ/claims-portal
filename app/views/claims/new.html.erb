@@ -1,0 +1,22 @@
+<h1>Create A Claim</h1>
+<%= form_with model: @claim do |f| %>
+  <div>
+    <%= f.label :claim_username %>
+    <%= f.select :claim_username, options_for_select(@claim_users) %>
+  </div>
+
+  <div>
+    <%= f.label :claim_data %>
+    <%= f.text_field :claim_data %>
+  </div>
+  <div>
+    <%= f.label :customer_name %>
+    <%= f.text_field :customer_name %>
+  </div>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to "Back", :back %>

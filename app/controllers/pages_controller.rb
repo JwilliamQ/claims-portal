@@ -1,13 +1,6 @@
 class PagesController < ApplicationController
   # index is a public page
-  def index
-
-  end
-
-  # secret is a private page, only logged-in user can enter
-  def create_claim
-    if current_user.blank?
-      render plain: '401 Unauthorized', status: :unauthorized
-    end
+  def index;
+  Rails.logger.info "🥸current user: #{current_user&.user_type}"
   end
 end

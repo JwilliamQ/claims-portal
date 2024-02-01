@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_01_160824) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_01_192644) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "claims", force: :cascade do |t|
+    t.string "claim_username"
+    t.string "created_by"
+    t.text "claim_data"
+    t.string "customer_name"
+    t.string "claim_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -23,4 +33,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_160824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
 end
