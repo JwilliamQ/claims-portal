@@ -6,6 +6,6 @@ Rails.application.initialize!
 
 Rails.logger = Logger.new(STDOUT)
 
-Rails.logger.level = Logger::INFO
+# Rails.logger.level = Logger::INFO
 
 Rails.logger.datetime_format = '%Y-%m-%d %H:%M:%S'
