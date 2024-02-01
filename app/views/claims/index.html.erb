@@ -1,9 +1,26 @@
-<h1>Users#index</h1>
-
-<%= link_to 'New claim', new_claim_path %>
+<h1>All Claims </h1>
 
 <table>
-
+  <thead>
+    <tr>
+      <th>Claim Username</th>
+      <th>Claim Data</th>
+      <th>Customer Name</th>
+      <!-- Add more table headings for other attributes as needed -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @claims.each do |claim| %>
+      <tr>
+        <td><%= claim.claim_username %></td>
+        <td><%= claim.claim_data %></td>
+        <td><%= claim.customer_name %></td>
+        <!-- Add more table cells for other attributes as needed -->
+      </tr>
+    <% end %>
+  </tbody>
 </table>
+
+
 
 <%= link_to 'Back home', root_path %>

@@ -1,6 +1,6 @@
 class ClaimsController < ApplicationController
   def index
-    @claims = Claim.all
+    @claims = Claim.where(claim_username: current_user&.name)
   end
 
   def new
@@ -10,6 +10,10 @@ class ClaimsController < ApplicationController
 
   def create
     @claim = Claim.new(claim_params)
+
+    # Set default values
+    @claim.claim_status = 'under_review' unless @claim.claim_status.present?
+    @claim.created_by = current_user.name if current_user.present?
 
     if @claim.save
       flash[:notice] = "Claim created successfully"

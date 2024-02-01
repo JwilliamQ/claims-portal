@@ -1,10 +1,17 @@
+  
+  <%# View is user is a Claims user %>
   <% if current_user&.user_type == 'claims' %>
     <h1>Welcome, claims user</h1>
+    <%= link_to 'Show your claims', claims_path %>
     <%= button_to 'Log out', user_session_path(current_user),  method: :delete %><br>
+
+  <%# View if user is an Admin user %>
   <% elsif current_user&.user_type == 'admin' %>
     <h1>Welcome, admin user</h1>
     <%= link_to 'Create Claim', new_claim_path %>
     <%= button_to 'Log out', user_session_path(current_user),  method: :delete %><br>
+
+  <%# View if user is not logged in %>
 <% else %>
   <h1>This is the index page</h1>
   <%= link_to 'Login', new_user_session_path %><br>
