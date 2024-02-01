@@ -1,0 +1,8 @@
+{
+  "workbench.colorCustomizations": {
+    "peekViewEditor.matchHighlightBackground": "#b4b4b40e",
+    "activityBar.background": "#915F6D",
+    "titleBar.activeBackground": "#B18793",
+    "titleBar.activeForeground": "#FCFAFA"
+  }
+}
