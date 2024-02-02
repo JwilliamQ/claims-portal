@@ -1,22 +1,26 @@
-<h1>Create A Claim</h1>
-<%= form_with model: @claim do |f| %>
-  <div>
-    <%= f.label :claim_username %>
-    <%= f.select :claim_username, options_for_select(@claim_users) %>
-  </div>
+<div class="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+  <h1 class="text-3xl font-bold mb-4">Create A Claim</h1>
 
-  <div>
-    <%= f.label :claim_data %>
-    <%= f.text_field :claim_data %>
-  </div>
-  <div>
-    <%= f.label :customer_name %>
-    <%= f.text_field :customer_name %>
-  </div>
+  <%= form_with model: @claim do |f| %>
+    <div class="mb-4">
+      <%= f.label "Assign to", class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.select :claim_username, options_for_select(@claim_users), class: "w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" %>
+    </div>
 
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
+    <div class="mb-4">
+      <%= f.label :customer_name, class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.text_field :customer_name, class: "w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" %>
+    </div>
 
-<%= link_to "Back", :back %>
+    <div class="mb-4">
+      <%= f.label :claim_data, class: "block text-gray-700 font-semibold mb-2" %>
+      <%= f.text_area :claim_data, class: "w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 resize-none" %>
+    </div>
+
+    <div>
+      <%= f.submit 'Create Claim', class: "w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring focus:ring-blue-200" %>
+    </div>
+  <% end %>
+
+  <%= link_to 'Back to Home', root_path, class: "block mt-4 text-sm text-blue-600 hover:underline" %>
+</div>

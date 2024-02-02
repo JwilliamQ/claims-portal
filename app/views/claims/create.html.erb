@@ -1,2 +1,24 @@
-<h1>Users#create</h1>
-<p>Find me in app/views/users/create.html.erb</p>
+<div class="max-w-lg mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+  <h1 class="text-3xl font-bold mb-4">Claim Details</h1>
+
+  <table class="w-full mb-4">
+    <tr>
+      <th class="py-2 px-4 bg-gray-200 text-left">Claim Username</th>
+      <td class="py-2 px-4 border">{{ @claim.claim_username }}</td>
+    </tr>
+    <tr>
+      <th class="py-2 px-4 bg-gray-200 text-left">Claim Data</th>
+      <td class="py-2 px-4 border">{{ @claim.claim_data }}</td>
+    </tr>
+    <tr>
+      <th class="py-2 px-4 bg-gray-200 text-left">Customer Name</th>
+      <td class="py-2 px-4 border">{{ @claim.customer_name }}</td>
+    </tr>
+    <!-- Add more rows for other attributes as needed -->
+  </table>
+
+  <%= button_to 'Approve', approve_claim_path(@claim), method: :put, class: "mr-2 py-1 px-3 bg-green-500 text-white rounded hover:bg-green-600 focus:outline-none focus:bg-green-600" %>
+  <%= button_to 'Decline', decline_claim_path(@claim), method: :put, class: "py-1 px-3 bg-red-500 text-white rounded hover:bg-red-600 focus:outline-none focus:bg-red-600" %>
+
+  <%= link_to 'Back to Claims', claims_path, class: "block mt-4 text-sm text-blue-600 hover:underline" %>
+</div>

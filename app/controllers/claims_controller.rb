@@ -1,6 +1,14 @@
 class ClaimsController < ApplicationController
   def index
-    @claims = Claim.where(claim_username: current_user&.name)
+
+    @approved_count = Claim.where(claim_status: 'approved', claim_username: current_user&.name).count
+    @declined_count = Claim.where(claim_status: 'declined', claim_username: current_user&.name).count
+    @under_review_count = Claim.where(claim_status: 'under_review', claim_username: current_user&.name).count
+    if params[:status].present?
+      @claims = Claim.where(claim_status: params[:status], claim_username: current_user&.name)
+    else
+      @claims = Claim.where(claim_username: current_user&.name)
+    end
   end
 
   def new
@@ -17,11 +25,27 @@ class ClaimsController < ApplicationController
 
     if @claim.save
       flash[:notice] = "Claim created successfully"
-      redirect_to claims_path
+      redirect_to new_claim_path
     else
       flash[:notice] = "Claim creation failed"
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @claim = Claim.find(params[:id])
+  end
+
+  def approve
+    @claim = Claim.find(params[:id])
+    @claim.update(claim_status: 'approved')
+    redirect_to claims_path(status: 'under_review')
+  end
+
+  def decline
+    @claim = Claim.find(params[:id])
+    @claim.update(claim_status: 'declined')
+    redirect_to claims_path(status: 'under_review')
   end
 
   private

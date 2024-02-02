@@ -1,0 +1,35 @@
+<!-- app/views/claims/show.html.erb -->
+
+<div class="max-w-2xl mx-auto mt-8">
+  <h1 class="text-3xl font-bold mb-4">Claim Details</h1>
+
+  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-lg leading-6 font-medium text-gray-900">Claim Information</h3>
+    </div>
+    <div class="border-t border-gray-200">
+      <dl>
+        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">Claim Username</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2"><%= @claim.claim_username %></dd>
+        </div>
+        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">Claim Data</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2"><%= @claim.claim_data %></dd>
+        </div>
+        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          <dt class="text-sm font-medium text-gray-500">Customer Name</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:col-span-2"><%= @claim.customer_name %></dd>
+        </div>
+        <!-- Add more rows for other attributes as needed -->
+      </dl>
+    </div>
+  </div>
+
+  <div class="mt-4 flex space-x-4">
+    <%= button_to 'Approve', approve_claim_path(@claim), method: :put, class: "inline-flex items-center px-4 py-2 bg-green-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-600 active:bg-green-700 focus:outline-none focus:border-green-700 focus:ring focus:ring-green-200 disabled:opacity-25 transition" %>
+    <%= button_to 'Decline', decline_claim_path(@claim), method: :put, class: "inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition" %>
+  </div>
+
+  <%= link_to 'Back to Claims', claims_path, class: "block mt-4 text-sm text-blue-600 hover:underline" %>
+</div>

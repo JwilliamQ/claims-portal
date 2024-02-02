@@ -1,22 +1,25 @@
-  
-  <%# View is user is a Claims user %>
-  <% if current_user&.user_type == 'claims' %>
-    <h1>Welcome, claims user</h1>
-    <%= link_to 'Show your claims', claims_path %>
-    <%= button_to 'Log out', user_session_path(current_user),  method: :delete %><br>
+<%# View is user is a Claims user %>
+<% if current_user&.user_type == 'claims' %>
+  <div class="max-w-lg mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold mb-4">Welcome, <%= current_user&.name %></h1>
+<%= link_to 'Show your claims', claims_path(status: 'under_review'), class: "block w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600" %>
+    <%= button_to 'Log out', user_session_path(current_user),  method: :delete, class: "block w-full mt-4 py-2 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:bg-red-600" %>
+  </div>
 
-  <%# View if user is an Admin user %>
-  <% elsif current_user&.user_type == 'admin' %>
-    <h1>Welcome, admin user</h1>
-    <%= link_to 'Create Claim', new_claim_path %>
-    <%= button_to 'Log out', user_session_path(current_user),  method: :delete %><br>
+<%# View if user is an Admin user %>
 
-  <%# View if user is not logged in %>
+<% elsif current_user&.user_type == 'admin' %>
+  <div class="max-w-lg mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold mb-4">Welcome, <%= current_user&.name %></h1>
+    <%= link_to 'Create Claim', new_claim_path, class: "block w-full py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:bg-green-600" %>
+    <%= button_to 'Log out', user_session_path(current_user),  method: :delete, class: "block w-full mt-4 py-2 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:bg-red-600" %>
+  </div>
+
+<%# View if user is not logged in %>
 <% else %>
-<div >
-  <h1>This is the index page</h1>
-  <%= link_to 'Login', new_user_session_path %><br>
-  <%= link_to 'Sign up', new_user_path %><br>
- </div>
+  <div class="max-w-lg mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold mb-4">Welcome! Login or Sign Up</h1>
+    <%= link_to 'Login', new_user_session_path, class: "block w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600" %>
+    <%= link_to 'Sign up', new_user_path, class: "block w-full mt-4 py-2 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:bg-green-600" %>
+  </div>
 <% end %>
-

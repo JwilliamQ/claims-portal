@@ -1,26 +1,65 @@
-<h1>All Claims </h1>
+<div class="max-w-2xl mx-auto mt-8">
+  <h1 class="text-3xl font-bold mb-4">Your Claims</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Claim Username</th>
-      <th>Claim Data</th>
-      <th>Customer Name</th>
-      <!-- Add more table headings for other attributes as needed -->
-    </tr>
-  </thead>
-  <tbody>
-    <% @claims.each do |claim| %>
-      <tr>
-        <td><%= claim.claim_username %></td>
-        <td><%= claim.claim_data %></td>
-        <td><%= claim.customer_name %></td>
-        <!-- Add more table cells for other attributes as needed -->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <!-- Clickable tabs -->
+  <div class="flex mb-4" id="tabs">
+    <%= link_to "Approved <span class='badge bg-white text-blue-600 rounded-full px-2 ml-1'>#{@approved_count}</span>".html_safe, claims_path(status: 'approved'), class: "tab-btn mr-4 py-2 px-4 bg-blue-500 text-white rounded-lg flex items-center justify-center" %>
 
+    <%= link_to "Declined <span class='badge bg-white text-red-600 rounded-full px-2 ml-1'>#{@declined_count}</span>".html_safe, claims_path(status: 'declined'), class: "tab-btn mr-4 py-2 px-4 bg-red-500 text-white rounded-lg flex items-center justify-center" %>
 
+    <%= link_to "Under Review <span class='badge bg-white text-yellow-600 rounded-full px-2 ml-1'>#{@under_review_count}</span>".html_safe, claims_path(status: 'under_review'), class: "tab-btn py-2 px-4 bg-yellow-500 text-white rounded-lg flex items-center justify-center" %>
+  </div>
 
-<%= link_to 'Back home', root_path %>
+  <% if @claims.present? %>
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <% case params[:status] %>
+          <% when 'approved' %>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Approved Claims</h3>
+          <% when 'declined' %>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Declined Claims</h3>
+          <% when 'under_review' %>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Under Review</h3>
+        <% end %>
+      </div>
+      <div class="border-t border-gray-200">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr>
+              <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Claim ID</th>
+              <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Customer Name</th>
+              <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <% @claims.each do |claim| %>
+              <tr>
+                <td class="px-6 py-4 whitespace-no-wrap"><%= claim.id %></td>
+                <td class="px-6 py-4 whitespace-no-wrap"><%= claim.customer_name %></td>
+                <td class="px-6 py-4 whitespace-no-wrap">
+                  <%= button_to 'View', claim_path(claim), method: :get, class: "text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+                </td>
+
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% else %>
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <% case params[:status] %>
+          <% when 'approved' %>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">No current records for Approved Claims</h3>
+          <% when 'declined' %>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">No current records for Declined Claims</h3>
+          <% when 'under_review' %>
+            <h3 class="text-lg leading-6 font-medium text-gray-900">No current records for Claims in Review</h3>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link_to 'Back to Home', root_path, class: "block mt-4 text-sm text-blue-600 hover:underline" %>
+</div>

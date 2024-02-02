@@ -1,8 +1,4 @@
 class UsersController < ApplicationController
-  def index
-    @users = User.all
-  end
-
   def new
     @user = User.new
   end
@@ -12,7 +8,7 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:notice] = "User created successfully"
-      redirect_to users_path
+      redirect_to root_path
     else
       flash[:notice] = "User creation failed"
       render :new, status: :unprocessable_entity
